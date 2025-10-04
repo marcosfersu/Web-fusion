@@ -1,0 +1,91 @@
+---
+
+---
+
+<nav
+  id="navbar"
+  class="fixed top-0 left-0 w-full py-1 bg-white text-[#202020] z-50 transition-all duration-300"
+>
+  <div
+    class="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between transition-all duration-300"
+  >
+    <!-- Logo -->
+    <a
+      href="/"
+      id="logo"
+      class="text-3xl font-semibold transition-all duration-300">.fusión</a
+    >
+
+    <!-- Botón hamburguesa (solo mobile) -->
+    <button
+      id="menu-btn"
+      class="md:hidden flex flex-col gap-[5px] p-2 focus:outline-none"
+    >
+      <span class="w-6 h-[2px] bg-[#202020]"></span>
+      <span class="w-6 h-[2px] bg-[#202020]"></span>
+      <span class="w-6 h-[2px] bg-[#202020]"></span>
+    </button>
+
+    <!-- Links desktop -->
+    <ul
+      class="hidden md:flex items-center gap-10 text-[17px] transition-all duration-300"
+    >
+      <li><a href="#inicio" class="hover:opacity-70">Inicio</a></li>
+      <li><a href="#servicios" class="hover:opacity-70">Servicios</a></li>
+      <li><a href="#plan" class="hover:opacity-70">Plan de acción</a></li>
+      <li><a href="#nosotros" class="hover:opacity-70">Nosotros</a></li>
+      <li>
+        <a
+          href="#contacto"
+          class="bg-[#202020] text-white px-5 py-2 rounded-full hover:bg-neutral-800"
+          >Contactar</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- Menú mobile -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-white border-t border-gray-200 transition-all duration-300"
+  >
+    <ul class="flex flex-col items-center gap-6 py-6 text-lg">
+      <li><a href="#inicio" class="hover:opacity-70">Inicio</a></li>
+      <li><a href="#servicios" class="hover:opacity-70">Servicios</a></li>
+      <li><a href="#plan" class="hover:opacity-70">Plan de acción</a></li>
+      <li><a href="#nosotros" class="hover:opacity-70">Nosotros</a></li>
+      <li>
+        <a
+          href="#contacto"
+          class="bg-[#202020] text-white px-6 py-2 rounded-full hover:bg-neutral-800"
+          >Contactar</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const navbar = document.getElementById("navbar");
+    const logo = document.getElementById("logo");
+
+    menuBtn?.addEventListener("click", () => {
+      mobileMenu?.classList.toggle("hidden");
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 60) {
+        navbar?.classList.add("py-1", "shadow-md");
+        navbar?.classList.remove("py-2");
+        logo?.classList.add("text-2xl");
+        logo?.classList.remove("text-3xl");
+      } else {
+        navbar?.classList.add("py-2");
+        navbar?.classList.remove("py-1", "shadow-md");
+        logo?.classList.add("text-3xl");
+        logo?.classList.remove("text-2xl");
+      }
+    });
+  </script>
+</nav>

@@ -1,0 +1,78 @@
+---
+const teamMembers = [
+  {
+    name: "Damián Boryszanski",
+    role: "Co-Founder",
+    location: "CABA, Argentina",
+    description:
+      "Responsable de transformar ideas creativas en estrategias de contenidos efectivas, tanto para redes sociales como para campañas publicitarias.",
+    linkedin: "URL_DE_LINKEDIN_DE_DAMIAN",
+    email: "EMAIL_DE_DAMIAN",
+    image: "./images/damian-boryszanski.png",
+  },
+  {
+    name: "Florencia Ramirez",
+    role: "Co-Founder",
+    location: "CABA, Argentina",
+    description:
+      "Especialista en la planificación y optimización de campañas digitales. Con un enfoque estratégico y dominio profundo de Meta y Google Ads.",
+    linkedin: "URL_DE_LINKEDIN_DE_FLORENCIA",
+    email: "EMAIL_DE_FLORENCIA",
+    image: "./images/florencia-ramirez.png",
+  },
+];
+---
+
+<section class="bg-gray-100 py-24">
+  <div class="mb-20">
+    <h3 class="font-bold text-5xl max-w-6xl mx-auto text-center mb-8">
+      Sobre nosotros
+    </h3>
+    <p class="text-center max-w-2xl mx-auto text-lg font-light">
+      Un equipo apasionado por el marketing digital con años de experiencia
+      transformando marcas
+    </p>
+  </div>
+  <div class="m-auto max-w-5xl">
+    <div class="flex gap-10 justify-center items-stretch">
+      {
+        teamMembers.map((member) => (
+          <article class="rounded-3xl overflow-hidden">
+            <img
+              src={member.image}
+              alt={`Foto de ${member.name}`}
+              class="max-h-72 object-cover w-full"
+            />
+            <div class="bg-white pt-8 px-8 pb-12">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="text-xl">{member.name}</h4>
+                  <p class="text-brand font-light">{member.role}</p>
+                </div>
+                <div class="flex gap-4">
+                  <a href={member.linkedin}>
+                    <svg width="32" height="33" class="bg-gray-100 rounded-lg">
+                      <use href={`./icons/icons.svg?v=300#linkedin`} />
+                    </svg>
+                  </a>
+                  <a href={`mailto:${member.email}`}>
+                    <svg width="32" height="33" class="bg-gray-100 rounded-lg">
+                      <use href={`./icons/icons.svg?v=302#email`} />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <p class="text-card-gray text-sm mt-3 flex gap-2 items-center">
+                <svg width="8" height="12">
+                  <use href={`./icons/icons.svg?v=303#localization`} />
+                </svg>
+                {member.location}
+              </p>
+              <p class="mt-6 leading-7 font-light">{member.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

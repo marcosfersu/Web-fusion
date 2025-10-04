@@ -1,0 +1,30 @@
+---
+import Next from "../assets/Next.astro";
+---
+
+<section class="min-h-screen flex flex-col justify-between">
+  <div
+    class="bg-gray-100 flex flex-col justify-center items-center gap-24 text-center p-4 flex-1"
+  >
+    <div class="flex flex-col justify-center items-center gap-8">
+      <h1 class="text-8xl font-bold max-w-7xl text-center">
+        Impulsamos marcas hacia su<span class="text-brand">
+          máximo potencial</span
+        >
+      </h1>
+      <p class="max-w-5xl text-3xl">
+        Transformamos tu presencia digital con estrategias innovadoras que
+        generan resultados reales y medibles. Marketing sin humo.
+      </p>
+    </div>
+    <button
+      class="bg-dark py-3 px-8 rounded-2xl text-white flex gap-3 justify-center items-center hover:bg-dark/90 transition cursor-pointer"
+      >Agendá una reunión <svg width="12" height="11">
+        <use href={`./icons/icons.svg?v=24#arrow`}></use>
+      </svg></button
+    >
+  </div>
+  <div class="flex justify-center items-center">
+    <Next />
+  </div>
+</section>

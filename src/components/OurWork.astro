@@ -1,0 +1,30 @@
+---
+const services = [
+  {
+    title: "Pauta publicitaria",
+    text: "Diseñamos campañas en Meta y Google Ads con foco en performance. Combinamos estrategia, segmentación y creatividad para maximizar el retorno de tu inversión publicitaria."
+  },
+  {
+    title: "Socios Digitales",
+    text: "Nos integramos como aliados digitales de tu negocio: analizamos tu situación actual, detectamos oportunidades de mejora y trazamos un plan integral para impulsar resultados reales."
+  },
+  {
+    title: "Social Media",
+    text: "Creamos y gestionamos contenido estratégico para redes sociales, pensado para conectar con tu audiencia, acompañar las campañas y posicionar tu negocio con una identidad sólida."
+  }
+];
+---
+
+<section>
+  <div class="max-w-7xl mx-auto pt-24 pb-32 px-4 flex flex-col gap-16">
+    <h2 class="text-5xl font-semibold text-center">¿Qué hacemos?</h2>
+    <div class="flex gap-12">
+      {services.map((service) => (
+        <div class="text-center">
+        <h3 class="font-bold mb-4 text-xl">{service.title}</h3>
+        <p class="leading-relaxed">{service.text}</p>
+      </div>
+    ))}
+  </div>
+</div>
+</section>
