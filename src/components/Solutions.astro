@@ -1,24 +1,45 @@
 <section>
   <div class="sectionImages flex">
-    <img src="./images/image-1.png" alt="" class="w-full h-auto object-cover">
-    <img src="./images/image-2.png" alt="" class="w-full h-auto object-cover">
-    <img src="./images/image-3.png" alt="" class="w-full h-auto object-cover">
+    <img
+      src="./images/image-1.webp"
+      alt=""
+      class="w-full h-auto object-cover"
+    />
+    <img
+      src="./images/image-2.webp"
+      alt=""
+      class="w-full h-auto object-cover"
+    />
+    <img
+      src="./images/image-3.webp"
+      alt=""
+      class="w-full h-auto object-cover"
+    />
   </div>
   <div class="py-32 bg-dark">
-    <h3 class="text-white text-5xl max-w-6xl mx-auto text-center">Ofrecemos soluciones integrales para maximizar tu inversión y generar <span class="text-brand">resultados reales</span></h3>
+    <h3 class="text-white text-5xl max-w-6xl mx-auto text-center">
+      Ofrecemos soluciones integrales para maximizar tu inversión y generar <span
+        class="text-brand">resultados reales</span
+      >
+    </h3>
   </div>
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  window.addEventListener("load", () => {
     const sectionImages = document.querySelector(".sectionImages");
     const imgs = sectionImages?.querySelectorAll("img");
 
-    if(!sectionImages) return;
+    if (!sectionImages) return;
 
-    const totalRatio = imgs ? Array.from(imgs).reduce((sum, img) => sum + img.naturalWidth / img.naturalHeight, 0) : 0;
+    const totalRatio = imgs
+      ? Array.from(imgs).reduce(
+          (sum, img) => sum + img.naturalWidth / img.naturalHeight,
+          0,
+        )
+      : 0;
     const height = sectionImages.clientWidth / totalRatio;
 
-    imgs?.forEach(img => img.style.height = `${height}px`);
+    imgs?.forEach((img) => (img.style.height = `${height}px`));
   });
 </script>
