@@ -19,3 +19,39 @@ import Layout from "../layouts/Layout.astro";
   <AboutUs />
   <ContactUs />
 </Layout>
+
+<style is:global>
+  .animation {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.8s ease-out,
+      transform 1s ease-out;
+  }
+
+  .animation.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const boxes = document.querySelectorAll(".animation");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          // Si querés que la animación ocurra una sola vez:
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.5, // porcentaje visible antes de activar
+    },
+  );
+
+  boxes.forEach((box) => observer.observe(box));
+</script>

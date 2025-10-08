@@ -1,5 +1,5 @@
 <section>
-  <div class="sectionImages flex">
+  <div class="sectionImages flex flex-row xl:flex-row">
     <img
       src="./images/image-1.webp"
       alt=""
@@ -16,8 +16,10 @@
       class="w-full h-auto object-cover"
     />
   </div>
-  <div class="py-32 bg-dark">
-    <h3 class="text-white text-5xl max-w-6xl mx-auto text-center">
+  <div class="lg:py-32 py-24 bg-dark">
+    <h3
+      class="text-white lg:text-5xl text-3xl px-5 max-w-6xl mx-auto text-center animation"
+    >
       Ofrecemos soluciones integrales para maximizar tu inversión y generar <span
         class="text-brand">resultados reales</span
       >
@@ -32,14 +34,29 @@
 
     if (!sectionImages) return;
 
-    const totalRatio = imgs
-      ? Array.from(imgs).reduce(
-          (sum, img) => sum + img.naturalWidth / img.naturalHeight,
-          0,
-        )
-      : 0;
-    const height = sectionImages.clientWidth / totalRatio;
+    const resizeImages = () => {
+      console.log("resize");
+      const totalRatio = imgs
+        ? Array.from(imgs).reduce(
+            (sum, img) => sum + img.naturalWidth / img.naturalHeight,
+            0,
+          )
+        : 0;
+      const height = sectionImages.clientWidth / totalRatio;
 
-    imgs?.forEach((img) => (img.style.height = `${height}px`));
+      imgs?.forEach((img) => (img.style.height = `${height}px`));
+    };
+
+    resizeImages();
+
+    let resetTime: ReturnType<typeof setTimeout> | undefined;
+
+    window.addEventListener("resize", () => {
+      clearTimeout(resetTime);
+      console.log("time");
+      resetTime = setTimeout(() => {
+        resizeImages();
+      }, 100);
+    });
   });
 </script>
