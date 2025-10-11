@@ -28,22 +28,36 @@
     </div>
     <div class="lg:w-1/2 w-full flex justify-center items-center animation">
       <form
-        class="w-full max-w-2xl flex flex-col gap-6 text-white"
-        action="#"
+        id="contactForm"
+        action="https://formsubmit.co/marcos.fersu@gmail.com"
         method="POST"
+        target="hidden_iframe"
+        class="w-full max-w-2xl flex flex-col gap-6 text-white"
       >
+        <!-- Campos ocultos de configuración FormSubmit -->
+        <input
+          type="hidden"
+          name="_subject"
+          value="Nuevo mensaje desde el sitio web"
+        />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_next" value="https://una.edu.ar/" />
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             type="text"
             name="name"
             placeholder="Nombre"
+            required
             class="bg-[#806FE7] w-full p-4 rounded-4xl placeholder-white/70 focus:outline-none"
           />
           <input
             type="email"
             name="email"
             placeholder="Email"
-            class="bg-\[#806FE7\] w-full p-4 rounded-4xl placeholder-white/70 focus:outline-none"
+            required
+            class="bg-[#806FE7] w-full p-4 rounded-4xl placeholder-white/70 focus:outline-none"
           />
         </div>
 
@@ -52,21 +66,21 @@
             type="text"
             name="company"
             placeholder="Empresa"
-            class="bg-\[#806FE7\] w-full p-4 rounded-4xl placeholder-white/70 focus:outline-none"
+            class="bg-[#806FE7] w-full p-4 rounded-4xl placeholder-white/70 focus:outline-none"
           />
           <div class="flex gap-4">
             <input
               type="tel"
               name="prefix"
-              placeholder="+54"
+              value="+54"
               readonly
-              class="bg-\[#806FE7\] p-4 rounded-4xl text-center placeholder-white/70 focus:outline-none md:col-span-1 w-20"
+              class="bg-[#806FE7] p-4 rounded-4xl text-center placeholder-white/70 focus:outline-none md:col-span-1 w-20"
             />
             <input
               type="tel"
               name="phone"
               placeholder="Teléfono"
-              class="bg-\[#806FE7\] w-full p-4 rounded-4xl placeholder-white/70 focus:outline-none md:col-span-1"
+              class="bg-[#806FE7] w-full p-4 rounded-4xl placeholder-white/70 focus:outline-none md:col-span-1"
             />
           </div>
         </div>
@@ -75,7 +89,7 @@
           name="message"
           placeholder="Contanos sobre tu proyecto..."
           rows="5"
-          class="bg-\[#806FE7\] w-full h-60 p-4 rounded-4xl placeholder-white/70 focus:outline-none resize-none px-8 py-6"
+          class="bg-[#806FE7] w-full h-60 p-4 rounded-4xl placeholder-white/70 focus:outline-none resize-none px-8 py-6"
         ></textarea>
 
         <button
@@ -84,7 +98,31 @@
         >
           Enviar mensaje
         </button>
+
+        <!-- Mensaje de confirmación -->
+        <p id="formMessage" class="text-center text-lg mt-4 hidden"></p>
       </form>
+
+      <!-- iframe oculto para enviar sin recargar -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+      ></iframe>
     </div>
   </dii>
 </section>
+
+<script>
+  const form = document.getElementById("contactForm") as HTMLFormElement;
+  const message = document.getElementById("formMessage");
+
+  form.addEventListener("submit", () => {
+    if (!message) return;
+
+    // Esperamos un momento para que el POST se envíe
+    setTimeout(() => {
+      message.textContent = "✅ ¡Mensaje enviado con éxito!";
+      message.style.display = "block";
+      message.style.color = "#00ff7f"; // verde
+      form.reset();
+    }, 800);
+  });
+</script>
