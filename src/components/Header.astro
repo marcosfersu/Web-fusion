@@ -4,52 +4,66 @@
 
 <nav
   id="navbar"
-  class="fixed top-0 left-0 w-full py-2 bg-white text-[#202020] z-50 transition-all duration-300"
+  class="fixed top-0 left-0 w-full text-[#202020] z-50 transition-all duration-300"
 >
-  <div
-    class="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between transition-all duration-300"
-  >
-    <!-- Logo -->
-    <a
-      href="/"
-      id="logo"
-      class="text-3xl font-semibold transition-all duration-300">.fusión</a
+  <div class="bg-white w-full mx-auto py-3 container-nav">
+    <div
+      class="max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-300"
     >
+      <!-- Logo -->
+      <a
+        href="/"
+        id="logo"
+        class="text-3xl font-semibold transition-all duration-300">.fusión</a
+      >
 
-    <!-- Botón hamburguesa (solo mobile) -->
-    <button
-      id="menu-btn"
-      class="md:hidden flex flex-col gap-[5px] p-2 focus:outline-none"
-    >
-      <span class="w-6 h-[2px] bg-[#202020]"></span>
-      <span class="w-6 h-[2px] bg-[#202020]"></span>
-      <span class="w-6 h-[2px] bg-[#202020]"></span>
-    </button>
+      <!-- Botón hamburguesa (solo mobile) -->
+      <button
+        id="menu-btn"
+        class="md:hidden flex flex-col gap-[5px] p-2 focus:outline-none cursor-pointer [&_span]:transition-all [&_span]:duration-300"
+      >
+        <span class="w-6 h-[2px] bg-[#202020]"></span>
+        <span class="w-6 h-[2px] bg-[#202020]"></span>
+        <span class="w-6 h-[2px] bg-[#202020]"></span>
+      </button>
 
-    <!-- Links desktop -->
-    <ul
-      class="hidden md:flex items-center gap-10 text-[17px] transition-all duration-300"
-    >
-      <li><a href="#inicio" class="hover:opacity-70">Inicio</a></li>
-      <li><a href="#servicios" class="hover:opacity-70">Servicios</a></li>
-      <li><a href="#plan" class="hover:opacity-70">Plan de acción</a></li>
-      <li><a href="#nosotros" class="hover:opacity-70">Nosotros</a></li>
-      <li>
-        <a
-          href="#contacto"
-          class="bg-[#202020] text-white px-5 py-2 rounded-full hover:bg-neutral-800"
-          >Contactar</a
-        >
-      </li>
-    </ul>
+      <!-- Links desktop -->
+      <ul
+        class="hidden md:flex items-center gap-10 text-[17px] transition-all duration-300 [&_a]:px-4 [&_a]:py-2 [&_a]:relative"
+      >
+        <li>
+          <a class="menu-item z-10" href="#inicio">Inicio</a>
+        </li>
+        <li>
+          <a class="menu-item z-10" href="#servicios">Servicios</a>
+        </li>
+        <li>
+          <a class="menu-item z-10" href="#plan">Plan de acción</a>
+        </li>
+        <li>
+          <a class="menu-item z-10" href="#nosotros">Nosotros</a>
+        </li>
+        <li>
+          <a
+            href="#contacto"
+            class="bg-[#202020] text-white px-5 py-2 rounded-full hover:bg-neutral-800"
+            >Contactar</a
+          >
+        </li>
+      </ul>
+      <div
+        id="menu-backdrop"
+        class="absolute bg-brand/5 backdrop-blur-lg rounded-xl left-[var(--left)] top-[var(--top)] w-[var(--width)] h-[var(--height)] transition-all duration-300 ease-in-out z-1 opacity-0 pointer-events-none invisible"
+      >
+      </div>
+    </div>
   </div>
-
   <!-- Menú mobile -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden bg-white border-t border-gray-200 transition-all duration-300"
+    class="md:hidden transition-all duration-300 shadow-sm bg-white"
   >
-    <ul class="flex flex-col items-center gap-6 py-6 text-lg">
+    <ul class="flex flex-col items-center gap-6 pt-10 pb-14 text-lg">
       <li><a href="#inicio" class="hover:opacity-70">Inicio</a></li>
       <li><a href="#servicios" class="hover:opacity-70">Servicios</a></li>
       <li><a href="#plan" class="hover:opacity-70">Plan de acción</a></li>
@@ -63,29 +77,101 @@
       </li>
     </ul>
   </div>
+</nav>
+<style>
+  #menu-btn {
+  }
 
-  <script>
-    const menuBtn = document.getElementById("menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const navbar = document.getElementById("navbar");
-    const logo = document.getElementById("logo");
+  #mobile-menu {
+    max-height: 0; /* altura inicial */
+    overflow: hidden; /* oculta contenido */
+    transition: max-height 0.5s ease; /* transición suave */
+    position: relative;
+    border-radius: 0 0 30px 30px;
 
-    menuBtn?.addEventListener("click", () => {
-      mobileMenu?.classList.toggle("hidden");
-    });
+    &.open-menu {
+      max-height: 1000px; /* un valor suficientemente grande */
+    }
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 60) {
-        navbar?.classList.add("py-1", "shadow-md");
-        navbar?.classList.remove("py-2");
-        logo?.classList.add("text-2xl");
-        logo?.classList.remove("text-3xl");
-      } else {
-        navbar?.classList.add("py-2");
-        navbar?.classList.remove("py-1", "shadow-md");
-        logo?.classList.add("text-3xl");
-        logo?.classList.remove("text-2xl");
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      transform: scaleX(0); /* empieza colapsado */
+      transform-origin: center;
+      background: #c2c2c2;
+      transition: all 0.3s ease;
+    }
+
+    &.open-menu::before {
+      transform: scaleX(1);
+    }
+  }
+</style>
+
+<script>
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const navbar = document.querySelector("#navbar>.container-nav");
+  const logo = document.getElementById("logo");
+  const listItem = document.querySelectorAll(".menu-item");
+  const MenuBackdrop = document.getElementById("menu-backdrop");
+
+  const spans = menuBtn?.querySelectorAll("span");
+
+  menuBtn?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("open-menu");
+
+    if (!spans) return;
+    if (mobileMenu?.classList.contains("open-menu")) {
+      spans[0].classList.add("rotate-45", "translate-y-[8px]");
+      spans[1].classList.add("opacity-0");
+      spans[1].classList.add("-translate-x-[20px]");
+      spans[2].classList.add("-rotate-45", "-translate-y-[6px]");
+    } else {
+      spans[0].classList.remove("rotate-45", "translate-y-[8px]");
+      spans[1].classList.remove("opacity-0");
+      spans[1].classList.remove("-translate-x-[20px]");
+      spans[2].classList.remove("-rotate-45", "-translate-y-[6px]");
+    }
+  });
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 60) {
+      navbar?.classList.add("py-3", "shadow-md");
+      navbar?.classList.remove("py-4");
+      logo?.classList.add("text-2xl");
+      logo?.classList.remove("text-3xl");
+    } else {
+      navbar?.classList.add("py-4");
+      navbar?.classList.remove("py-3", "shadow-md");
+      logo?.classList.add("text-3xl");
+      logo?.classList.remove("text-2xl");
+    }
+  });
+
+  listItem.forEach((item) => {
+    item.addEventListener("mouseenter", (e) => {
+      const rect = (e.target as HTMLElement).getBoundingClientRect();
+      MenuBackdrop?.style.setProperty("--left", `${rect.left}px`);
+      MenuBackdrop?.style.setProperty("--top", `${rect.top}px`);
+      MenuBackdrop?.style.setProperty("--width", `${rect.width}px`);
+      MenuBackdrop?.style.setProperty("--height", `${rect.height}px`);
+      if (MenuBackdrop) {
+        MenuBackdrop.style.opacity = "1";
+        MenuBackdrop.style.visibility = "visible";
       }
     });
-  </script>
-</nav>
+    item.addEventListener("mouseleave", () => {
+      MenuBackdrop?.style.setProperty("--width", `0px`);
+      MenuBackdrop?.style.setProperty("--height", `0px`);
+      if (MenuBackdrop) {
+        MenuBackdrop.style.opacity = "0";
+        MenuBackdrop.style.visibility = "hidden";
+      }
+    });
+  });
+</script>
