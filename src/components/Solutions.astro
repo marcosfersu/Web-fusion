@@ -35,7 +35,6 @@
     if (!sectionImages) return;
 
     const resizeImages = () => {
-      console.log("resize");
       const totalRatio = imgs
         ? Array.from(imgs).reduce(
             (sum, img) => sum + img.naturalWidth / img.naturalHeight,
@@ -53,7 +52,6 @@
 
     window.addEventListener("resize", () => {
       clearTimeout(resetTime);
-      console.log("time");
       resetTime = setTimeout(() => {
         resizeImages();
       }, 100);
