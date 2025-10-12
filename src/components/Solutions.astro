@@ -1,19 +1,25 @@
 <section>
-  <div class="sectionImages flex flex-row xl:flex-row">
+  <div class="sectionImages flex-row xl:flex-row md:flex hidden">
     <img
-      src="./images/image-1.webp"
-      alt=""
+      src="./images/fusion-web-1.webp"
+      alt="Vista de solución web 1"
       class="w-full h-auto object-cover"
     />
     <img
-      src="./images/image-2.webp"
-      alt=""
+      src="./images/fusion-web-2.webp"
+      alt="Vista de solución web 2"
       class="w-full h-auto object-cover"
     />
     <img
-      src="./images/image-3.webp"
-      alt=""
+      src="./images/fusion-web-3.webp"
+      alt="Vista de solución web 3"
       class="w-full h-auto object-cover"
+    />
+  </div>
+  <div class="flex md:hidden">
+    <img
+      src="./images/fusion-web_mobile.webp"
+      alt="Vista móvil de la solución web"
     />
   </div>
   <div class="lg:py-32 py-24 bg-dark">
@@ -46,15 +52,25 @@
       imgs?.forEach((img) => (img.style.height = `${height}px`));
     };
 
-    resizeImages();
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
 
-    let resetTime: ReturnType<typeof setTimeout> | undefined;
-
-    window.addEventListener("resize", () => {
-      clearTimeout(resetTime);
-      resetTime = setTimeout(() => {
+    function handleMobileChange(e: MediaQueryListEvent | MediaQueryList) {
+      if (e.matches) {
+      } else {
         resizeImages();
-      }, 100);
-    });
+
+        let resetTime: ReturnType<typeof setTimeout> | undefined;
+
+        window.addEventListener("resize", () => {
+          clearTimeout(resetTime);
+          resetTime = setTimeout(() => {
+            resizeImages();
+          }, 100);
+        });
+      }
+    }
+
+    mobileQuery.addEventListener("change", handleMobileChange);
+    handleMobileChange(mobileQuery);
   });
 </script>

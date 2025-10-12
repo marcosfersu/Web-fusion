@@ -119,8 +119,20 @@
   const logo = document.getElementById("logo");
   const listItem = document.querySelectorAll(".menu-item");
   const MenuBackdrop = document.getElementById("menu-backdrop");
+  const mobileLink = mobileMenu?.querySelectorAll("a");
 
   const spans = menuBtn?.querySelectorAll("span");
+
+  mobileLink?.forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu?.classList.remove("open-menu");
+      if (!spans) return;
+      spans[0].classList.remove("rotate-45", "translate-y-[8px]");
+      spans[1].classList.remove("opacity-0");
+      spans[1].classList.remove("-translate-x-[20px]");
+      spans[2].classList.remove("-rotate-45", "-translate-y-[6px]");
+    });
+  });
 
   menuBtn?.addEventListener("click", () => {
     mobileMenu?.classList.toggle("open-menu");
@@ -154,7 +166,6 @@
   });
 
   const applyMenuEffect = () => {
-    console.log("applyMenuEffect");
     listItem.forEach((item) => {
       item.addEventListener("mouseenter", (e) => {
         const rect = (e.target as HTMLElement).getBoundingClientRect();
