@@ -153,25 +153,40 @@
     }
   });
 
-  listItem.forEach((item) => {
-    item.addEventListener("mouseenter", (e) => {
-      const rect = (e.target as HTMLElement).getBoundingClientRect();
-      MenuBackdrop?.style.setProperty("--left", `${rect.left}px`);
-      MenuBackdrop?.style.setProperty("--top", `${rect.top}px`);
-      MenuBackdrop?.style.setProperty("--width", `${rect.width}px`);
-      MenuBackdrop?.style.setProperty("--height", `${rect.height}px`);
-      if (MenuBackdrop) {
-        MenuBackdrop.style.opacity = "1";
-        MenuBackdrop.style.visibility = "visible";
-      }
+  const applyMenuEffect = () => {
+    console.log("applyMenuEffect");
+    listItem.forEach((item) => {
+      item.addEventListener("mouseenter", (e) => {
+        const rect = (e.target as HTMLElement).getBoundingClientRect();
+        MenuBackdrop?.style.setProperty("--left", `${rect.left}px`);
+        MenuBackdrop?.style.setProperty("--top", `${rect.top}px`);
+        MenuBackdrop?.style.setProperty("--width", `${rect.width}px`);
+        MenuBackdrop?.style.setProperty("--height", `${rect.height}px`);
+        if (MenuBackdrop) {
+          MenuBackdrop.style.opacity = "1";
+          MenuBackdrop.style.visibility = "visible";
+        }
+      });
+      item.addEventListener("mouseleave", () => {
+        MenuBackdrop?.style.setProperty("--width", `0px`);
+        MenuBackdrop?.style.setProperty("--height", `0px`);
+        if (MenuBackdrop) {
+          MenuBackdrop.style.opacity = "0";
+          MenuBackdrop.style.visibility = "hidden";
+        }
+      });
     });
-    item.addEventListener("mouseleave", () => {
-      MenuBackdrop?.style.setProperty("--width", `0px`);
-      MenuBackdrop?.style.setProperty("--height", `0px`);
-      if (MenuBackdrop) {
-        MenuBackdrop.style.opacity = "0";
-        MenuBackdrop.style.visibility = "hidden";
-      }
-    });
-  });
+  };
+
+  const mobileQuery = window.matchMedia("(max-width: 767px)");
+
+  function handleMobileChange(e: MediaQueryListEvent | MediaQueryList) {
+    if (e.matches) {
+    } else {
+      applyMenuEffect();
+    }
+  }
+
+  mobileQuery.addEventListener("change", handleMobileChange);
+  handleMobileChange(mobileQuery);
 </script>
